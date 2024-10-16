@@ -112,3 +112,29 @@ ALTER TABLE t_patrimonio
 ALTER TABLE t_transacao
     ADD CONSTRAINT t_transacao_t_usuario_fk FOREIGN KEY ( cd_usuario )
         REFERENCES t_usuario ( cd_usuario );
+```
+## Comandos para deletar as tabelas:
+
+```SQL
+
+ALTER TABLE t_investimento DROP CONSTRAINT t_investimento_t_usuario_fk;
+ALTER TABLE t_login DROP CONSTRAINT t_login_t_usuario_fk;
+ALTER TABLE t_meta DROP CONSTRAINT t_meta_t_usuario_fk;
+ALTER TABLE t_patrimonio DROP CONSTRAINT t_patrimonio_t_usuario_fk;
+ALTER TABLE t_transacao DROP CONSTRAINT t_transacao_t_usuario_fk;
+
+DROP TABLE t_investimento;
+DROP TABLE t_login;
+DROP TABLE t_meta;
+DROP TABLE t_patrimonio;
+DROP TABLE t_transacao;
+DROP TABLE t_usuario;
+
+DROP SEQUENCE seq_investimento;
+DROP SEQUENCE seq_login;
+DROP SEQUENCE seq_meta;
+DROP SEQUENCE seq_patrimonio;
+DROP SEQUENCE seq_transacao;
+DROP SEQUENCE seq_usuario;
+
+
