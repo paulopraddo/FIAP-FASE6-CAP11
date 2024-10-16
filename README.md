@@ -5,10 +5,7 @@
 
 ## Criando a tabela no banco de dados
 ```SQL
-CREATE SEQUENCE  seq_investimento
-    START WITH 1
-    INCREMENT BY 1;
-    
+
 CREATE TABLE t_investimento (
     cd_investimento INTEGER NOT NULL,
     cd_usuario      INTEGER NOT NULL,
@@ -20,11 +17,8 @@ CREATE TABLE t_investimento (
     dt_vencimento   DATE NOT NULL
 );
 
-ALTER TABLE t_investimento ADD CONSTRAINT t_investimento_pk PRIMARY KEY ( cd_investimento );
+ALTER TABLE t_investimento ADD CONSTRAINT t_investimento_pk PRIMARY KEY (cd_investimento);
 
-CREATE SEQUENCE  seq_login
-    START WITH 1
-    INCREMENT BY 1;
 
 CREATE TABLE t_login (
     cd_login   INTEGER NOT NULL,
@@ -32,12 +26,8 @@ CREATE TABLE t_login (
     dt_login   DATE NOT NULL
 );
 
-ALTER TABLE t_login ADD CONSTRAINT t_login_pk PRIMARY KEY ( cd_login );
+ALTER TABLE t_login ADD CONSTRAINT t_login_pk PRIMARY KEY (cd_login);
 
-CREATE SEQUENCE  seq_meta
-    START WITH 1
-    INCREMENT BY 1;
-    
 CREATE TABLE t_meta (
     cd_metas   INTEGER NOT NULL,
     cd_usuario INTEGER NOT NULL,
@@ -46,11 +36,7 @@ CREATE TABLE t_meta (
     vl_poupar  FLOAT NOT NULL
 );
 
-ALTER TABLE t_meta ADD CONSTRAINT t_meta_pk PRIMARY KEY ( cd_metas );
-
-CREATE SEQUENCE  seq_patrimonio
-    START WITH 1
-    INCREMENT BY 1;
+ALTER TABLE t_meta ADD CONSTRAINT t_meta_pk PRIMARY KEY (cd_metas);
 
 CREATE TABLE t_patrimonio (
     cd_patrimonio INTEGER NOT NULL,
@@ -59,12 +45,9 @@ CREATE TABLE t_patrimonio (
     vl_patrimonio FLOAT NOT NULL
 );
 
-ALTER TABLE t_patrimonio ADD CONSTRAINT t_patrimonio_pk PRIMARY KEY ( cd_patrimonio );
+ALTER TABLE t_patrimonio ADD CONSTRAINT t_patrimonio_pk PRIMARY KEY (cd_patrimonio);
 
-CREATE SEQUENCE  seq_transacao
-    START WITH 1
-    INCREMENT BY 1;
-    
+-- Criando a tabela t_transacao sem sequence
 CREATE TABLE t_transacao (
     cd_transacao INTEGER NOT NULL,
     cd_usuario   INTEGER NOT NULL,
@@ -75,12 +58,8 @@ CREATE TABLE t_transacao (
     dt_transacao DATE NOT NULL
 );
 
-ALTER TABLE t_transacao ADD CONSTRAINT t_transacao_pk PRIMARY KEY ( cd_transacao );
+ALTER TABLE t_transacao ADD CONSTRAINT t_transacao_pk PRIMARY KEY (cd_transacao);
 
-CREATE SEQUENCE  seq_usuario
-    START WITH 1
-    INCREMENT BY 1;
-    
 CREATE TABLE t_usuario (
     cd_usuario INTEGER NOT NULL,
     nm_nome    VARCHAR2(100) NOT NULL,
@@ -91,27 +70,29 @@ CREATE TABLE t_usuario (
     dt_criacao DATE NOT NULL
 );
 
-ALTER TABLE t_usuario ADD CONSTRAINT t_usuario_pk PRIMARY KEY ( cd_usuario );
+ALTER TABLE t_usuario ADD CONSTRAINT t_usuario_pk PRIMARY KEY (cd_usuario);
 
+-- Adicionando chaves estrangeiras para todas as tabelas que referenciam t_usuario
 ALTER TABLE t_investimento
-    ADD CONSTRAINT t_investimento_t_usuario_fk FOREIGN KEY ( cd_usuario )
-        REFERENCES t_usuario ( cd_usuario );
+    ADD CONSTRAINT t_investimento_t_usuario_fk FOREIGN KEY (cd_usuario)
+        REFERENCES t_usuario (cd_usuario);
 
 ALTER TABLE t_login
-    ADD CONSTRAINT t_login_t_usuario_fk FOREIGN KEY ( cd_usuario )
-        REFERENCES t_usuario ( cd_usuario );
+    ADD CONSTRAINT t_login_t_usuario_fk FOREIGN KEY (cd_usuario)
+        REFERENCES t_usuario (cd_usuario);
 
 ALTER TABLE t_meta
-    ADD CONSTRAINT t_meta_t_usuario_fk FOREIGN KEY ( cd_usuario )
-        REFERENCES t_usuario ( cd_usuario );
+    ADD CONSTRAINT t_meta_t_usuario_fk FOREIGN KEY (cd_usuario)
+        REFERENCES t_usuario (cd_usuario);
 
 ALTER TABLE t_patrimonio
-    ADD CONSTRAINT t_patrimonio_t_usuario_fk FOREIGN KEY ( cd_usuario )
-        REFERENCES t_usuario ( cd_usuario );
+    ADD CONSTRAINT t_patrimonio_t_usuario_fk FOREIGN KEY (cd_usuario)
+        REFERENCES t_usuario (cd_usuario);
 
 ALTER TABLE t_transacao
-    ADD CONSTRAINT t_transacao_t_usuario_fk FOREIGN KEY ( cd_usuario )
-        REFERENCES t_usuario ( cd_usuario );
+    ADD CONSTRAINT t_transacao_t_usuario_fk FOREIGN KEY (cd_usuario)
+        REFERENCES t_usuario (cd_usuario);
+
 ```
 ## Comandos para deletar as tabelas:
 
