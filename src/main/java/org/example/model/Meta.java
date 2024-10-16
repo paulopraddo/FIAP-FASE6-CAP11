@@ -1,36 +1,27 @@
 package org.example.model;
 
 public class Meta {
+
     private Integer codigoMeta;
     private Integer codigoUsuario;
     private String nomeMeta;
     private float valorMeta;
-    private float valorPopular;
+    private float valorPoupar;
 
-    @Override
-    public String toString() {
-        return "Meta{" +
-                "cd_meta=" + codigoMeta +
-                ", nm_meta='" + nomeMeta + '\'' +
-                ", vl_meta=" + valorMeta +
-                '}';
-    }
-
-    public Meta(Integer cd_metas, Integer codigoUsuario, String nomeMeta, float vl_meta, float vl_popular) {
-        this.codigoMeta = cd_metas;
+    public Meta(Integer codigoMeta, Integer codigoUsuario, String nomeMeta, float valorMeta, float valorPoupar) {
+        this.codigoMeta = codigoMeta;
         this.codigoUsuario = codigoUsuario;
         this.nomeMeta = nomeMeta;
-        this.valorMeta = vl_meta;
-        this.valorPopular = vl_popular;
+        this.valorMeta = valorMeta;
+        this.valorPoupar = valorPoupar;
     }
 
-    // Getters e Setters
-    public Integer getCd_metas() {
+    public Integer getCodigoMeta() {
         return codigoMeta;
     }
 
-    public void setCd_metas(Integer cd_metas) {
-        this.codigoMeta = cd_metas;
+    public void setCodigoMeta(Integer codigoMeta) {
+        this.codigoMeta = codigoMeta;
     }
 
     public Integer getCodigoUsuario() {
@@ -49,19 +40,29 @@ public class Meta {
         this.nomeMeta = nomeMeta;
     }
 
-    public float getVl_meta() {
+    public float getValorMeta() {
         return valorMeta;
     }
 
-    public void setVl_meta(float vl_meta) {
-        this.valorMeta = vl_meta;
+    public void setValorMeta(float valorMeta) {
+        this.valorMeta = valorMeta;
     }
 
-    public float getVl_popular() {
-        return valorPopular;
+    public float getValorPoupar() {
+        return valorPoupar;
     }
 
-    public void setVl_popular(float vl_popular) {
-        this.valorPopular = vl_popular;
+    public void setValorPoupar(float valorPoupar) {
+        this.valorPoupar = valorPoupar;
     }
+
+    @Override
+    public String toString() {
+        return "Meta{" +
+                "cd_meta=" + codigoMeta +
+                ", nm_meta='" + nomeMeta + '\'' +
+                ", vl_meta=" + valorMeta +
+                '}';
+    }
+
 }

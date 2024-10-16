@@ -3,25 +3,17 @@ package org.example.model;
 import java.util.Date;
 
 public class Login {
+
     private String login;
     private Integer codigoUsuario;
-    private Date dtLogin;
+    private Date dateLogin;
 
-    public Login(String login, Integer codigoUsuario, Date dtLogin) {
+    public Login(String login, Integer codigoUsuario, Date dateLogin) {
         this.login = login;
         this.codigoUsuario = codigoUsuario;
-        this.dtLogin = dtLogin;
+        this.dateLogin = dateLogin;
     }
 
-    @Override
-    public String toString() {
-        return "Login{" +
-                "cd_login='" + login + '\'' +
-                ", dt_login=" + dtLogin +
-                '}';
-    }
-
-    // Getters e Setters
     public String getLogin() {
         return login;
     }
@@ -38,11 +30,21 @@ public class Login {
         this.codigoUsuario = codigoUsuario;
     }
 
-    public Date getDtLogin() {
-        return dtLogin;
+    public Date getDataLogin() {
+        return dateLogin;
     }
 
-    public void setDtLogin(Date dtLogin) {
-        this.dtLogin = dtLogin;
+    public void setDateLogin(Date dateLogin) {
+        this.dateLogin = dateLogin;
     }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+                "cd_login='" + login + '\'' +
+                ", dt_login=" + dateLogin +
+                '}';
+    }
+
 }
+
