@@ -1,11 +1,20 @@
 package org.example.model;
 
 public class Meta {
-    private Integer codigoMeta;  // PK
-    private Integer codigoUsuario;  // F
+    private Integer codigoMeta;
+    private Integer codigoUsuario;
     private String nomeMeta;
     private float valorMeta;
     private float valorPopular;
+
+    @Override
+    public String toString() {
+        return "Meta{" +
+                "cd_meta=" + codigoMeta +
+                ", nm_meta='" + nomeMeta + '\'' +
+                ", vl_meta=" + valorMeta +
+                '}';
+    }
 
     public Meta(Integer cd_metas, Integer codigoUsuario, String nomeMeta, float vl_meta, float vl_popular) {
         this.codigoMeta = cd_metas;

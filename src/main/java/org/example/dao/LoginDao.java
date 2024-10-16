@@ -10,7 +10,7 @@ import java.util.List;
 public class LoginDao {
 
     public void insert(Login login) {
-        String sql = "INSERT INTO T_Login (login, cd_usuario, dt_login) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO T_Login (cd_login, cd_usuario, dt_login) VALUES (?, ?, ?)";
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -51,7 +51,7 @@ public class LoginDao {
 
             while (resultSet.next()) {
                 Login login = new Login(
-                        resultSet.getString("login"),
+                        resultSet.getString("cd_login"),
                         resultSet.getInt("cd_usuario"),
                         resultSet.getDate("dt_login")
                 );

@@ -3,14 +3,23 @@ package org.example.model;
 import java.util.Date;
 
 public class Investimento {
-    private Integer codigoInvestimento;  // PK
-    private Integer codigoUsuario;  // F
+    private Integer codigoInvestimento;
+    private Integer codigoUsuario;
     private Date dataCompra;
     private String nomeDoAtivo;
     private float valorPreco;
     private String classe;
     private float valorTaxa;
     private Date dataDeVencimento;
+
+    @Override
+    public String toString() {
+        return "Investimento{" +
+                "cd_investimento=" + codigoInvestimento +
+                ", nm_ativo='" + nomeDoAtivo + '\'' +
+                ", vl_preco=" + valorPreco +
+                '}';
+    }
 
     public Investimento(Integer codigoInvestimento, Integer codigoUsuario, Date dt_compra, String nm_ativo, float vl_preco, String classe, float vl_taxa, Date dt_vencimento) {
         this.codigoInvestimento = codigoInvestimento;

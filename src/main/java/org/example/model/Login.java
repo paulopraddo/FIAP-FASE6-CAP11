@@ -3,14 +3,22 @@ package org.example.model;
 import java.util.Date;
 
 public class Login {
-    private String login;  // PK
-    private Integer codigoUsuario;  // F
+    private String login;
+    private Integer codigoUsuario;
     private Date dtLogin;
 
     public Login(String login, Integer codigoUsuario, Date dtLogin) {
         this.login = login;
         this.codigoUsuario = codigoUsuario;
         this.dtLogin = dtLogin;
+    }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+                "cd_login='" + login + '\'' +
+                ", dt_login=" + dtLogin +
+                '}';
     }
 
     // Getters e Setters

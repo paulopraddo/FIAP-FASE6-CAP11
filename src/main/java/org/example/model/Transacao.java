@@ -11,6 +11,14 @@ public class Transacao {
     private String tipo;
     private Date dataTransacao;
 
+    public String toString() {
+        return "Transacao{" +
+                "cd_transacao=" + codigoTransacao +
+                ", nm_transacao='" + nomeTransacao + '\'' +
+                ", vl_transacao=" + valorTransacao +
+                '}';
+    }
+
     public Transacao(Integer codigoTransacao, Integer codigoUsuario, String nomeTransacao, float valorTransacao, String categoria, String tipo, Date dataTransacao) {
         this.codigoTransacao = codigoTransacao;
         this.codigoUsuario = codigoUsuario;
