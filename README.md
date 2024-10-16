@@ -111,11 +111,4 @@ DROP TABLE t_patrimonio;
 DROP TABLE t_transacao;
 DROP TABLE t_usuario;
 
-DROP SEQUENCE seq_investimento;
-DROP SEQUENCE seq_login;
-DROP SEQUENCE seq_meta;
-DROP SEQUENCE seq_patrimonio;
-DROP SEQUENCE seq_transacao;
-DROP SEQUENCE seq_usuario;
-
 
