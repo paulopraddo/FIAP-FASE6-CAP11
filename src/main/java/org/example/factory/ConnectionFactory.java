@@ -6,18 +6,27 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USER = "system";
-    private static final String PASSWORD = "1234";
+    private static ConnectionFactory connectionFactory;
+    private static final String URL = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
+    private static final String USER = "rm554670";
+    private static final String PASSWORD = "200287";
 
-    public static Connection getConnection() throws SQLException {
+    private ConnectionFactory() {
+    }
+
+    public static Connection getConnection() {
+        Connection connection = null;
+
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
-            throw new SQLException("Driver Oracle JDBC não encontrado.", e);
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Driver Oracle JDBC não encontrado.", e);
         }
 
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+        return connection;
     }
 
     public static void closeConnection(Connection connection) {
@@ -29,4 +38,5 @@ public class ConnectionFactory {
             }
         }
     }
+
 }

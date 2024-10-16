@@ -3,6 +3,7 @@ package org.example.model;
 import java.util.Date;
 
 public class Transacao {
+
     private Integer codigoTransacao;
     private Integer codigoUsuario;
     private String nomeTransacao;
@@ -10,14 +11,6 @@ public class Transacao {
     private String categoria;
     private String tipo;
     private Date dataTransacao;
-
-    public String toString() {
-        return "Transacao{" +
-                "cd_transacao=" + codigoTransacao +
-                ", nm_transacao='" + nomeTransacao + '\'' +
-                ", vl_transacao=" + valorTransacao +
-                '}';
-    }
 
     public Transacao(Integer codigoTransacao, Integer codigoUsuario, String nomeTransacao, float valorTransacao, String categoria, String tipo, Date dataTransacao) {
         this.codigoTransacao = codigoTransacao;
@@ -29,7 +22,6 @@ public class Transacao {
         this.dataTransacao = dataTransacao;
     }
 
-    // Getters e Setters
     public Integer getCodigoTransacao() {
         return codigoTransacao;
     }
@@ -85,4 +77,13 @@ public class Transacao {
     public void setDataTransacao(Date dataTransacao) {
         this.dataTransacao = dataTransacao;
     }
+
+    public String toString() {
+        return "Transacao{" +
+                "cd_transacao=" + codigoTransacao +
+                ", nm_transacao='" + nomeTransacao + '\'' +
+                ", vl_transacao=" + valorTransacao +
+                '}';
+    }
+
 }

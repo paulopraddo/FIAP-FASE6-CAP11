@@ -1,19 +1,11 @@
 package org.example.model;
 
 public class Patrimonio {
+
     private Integer codigoPatrimonio;
     private Integer codigoUsuario;
     private String nomePatrimonio;
     private float valorPatrimonio;
-
-    @Override
-    public String toString() {
-        return "Patrimonio{" +
-                "cd_patrimonio=" + codigoPatrimonio +
-                ", nm_patrimonio='" + nomePatrimonio + '\'' +
-                ", vl_patrimonio=" + valorPatrimonio +
-                '}';
-    }
 
     public Patrimonio(Integer codigoPatrimonio, Integer codigoUsuario, String nomePatrimonio, float valorPatrimonio) {
         this.codigoPatrimonio = codigoPatrimonio;
@@ -22,7 +14,6 @@ public class Patrimonio {
         this.valorPatrimonio = valorPatrimonio;
     }
 
-    // Getters e Setters
     public Integer getCodigoPatrimonio() {
         return codigoPatrimonio;
     }
@@ -54,5 +45,14 @@ public class Patrimonio {
     public void setValorPatrimonio(float valorPatrimonio) {
         this.valorPatrimonio = valorPatrimonio;
     }
-}
 
+    @Override
+    public String toString() {
+        return "Patrimonio{" +
+                "cd_patrimonio=" + codigoPatrimonio +
+                ", nm_patrimonio='" + nomePatrimonio + '\'' +
+                ", vl_patrimonio=" + valorPatrimonio +
+                '}';
+    }
+
+}
