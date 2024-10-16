@@ -34,8 +34,8 @@ public class App {
             Date dataVencimento = calendar.getTime();
 
             Investimento investimento = new Investimento(
-                    1000 + i,
-                    200 + i,
+                    3000 + i,
+                    3000 + i,
                     dataCompra,
                     "Ativo " + (100 + i),
                     1000.0f + (i * 50),
@@ -44,41 +44,6 @@ public class App {
                     dataVencimento
             );
             investimentoDao.insert(investimento);
-
-            Login login = new Login(
-                    "user" + (200 + i),
-                    300 + i,
-                    new Date()
-            );
-            loginDao.insert(login);
-
-            Meta meta = new Meta(
-                    400 + i,
-                    500 + i,
-                    "Meta " + (i * 10),
-                    10000.0f + (i * 1000),
-                    5000.0f + (i * 500)
-            );
-            metaDao.insert(meta);
-
-            Patrimonio patrimonio = new Patrimonio(
-                    600 + i,
-                    700 + i,
-                    "Patrimônio " + (i + 5),
-                    30000.0f + (i * 3000)
-            );
-            patrimonioDao.insert(patrimonio);
-
-            Transacao transacao = new Transacao(
-                    800 + i,
-                    900 + i,
-                    "Transação " + (i * 20),
-                    200.0f + (i * 25),
-                    "Categoria " + i,
-                    (i % 2 == 0) ? "Despesa" : "Receita",
-                    new Date()
-            );
-            transacaoDao.insert(transacao);
         }
 
         System.out.println("\nRecuperando os registros cadastrados...");
