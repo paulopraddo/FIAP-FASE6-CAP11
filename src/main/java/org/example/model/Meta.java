@@ -58,7 +58,7 @@ public class Meta {
 
     @Override
     public String toString() {
-        return "Meta{" +
+        return "Meta {" +
                 "cd_meta=" + codigoMeta +
                 ", nm_meta='" + nomeMeta + '\'' +
                 ", vl_meta=" + valorMeta +

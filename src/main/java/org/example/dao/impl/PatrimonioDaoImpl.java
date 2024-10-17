@@ -1,5 +1,6 @@
 package org.example.dao.impl;
 
+import org.example.dao.PatrimonioDao;
 import org.example.factory.ConnectionFactory;
 import org.example.model.Patrimonio;
 
@@ -9,31 +10,35 @@ import java.util.List;
 
 public class PatrimonioDaoImpl implements PatrimonioDao {
 
+    Connection connection = null;
+    PreparedStatement statement = null;
+
     @Override
     public void create(Patrimonio patrimonio) {
-        String sql = "INSERT INTO T_Patrimonio (cd_patrimonio, cd_usuario, nm_patrimonio, vl_patrimonio) VALUES (?, ?, ?, ?)";
-        Connection connection = null;
-        PreparedStatement statement = null;
+        String sql = "INSERT INTO T_Patrimonio (cd_patrimonio, cd_usuario, nm_patrimonio, vl_patrimonio) " +
+                "VALUES (SEQ_PATRIMONIO.NEXTVAL, ?, ?, ?)";
 
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(1, patrimonio.getCodigoPatrimonio());
-            statement.setInt(2, patrimonio.getCodigoUsuario());
-            statement.setString(3, patrimonio.getNomePatrimonio());
-            statement.setFloat(4, patrimonio.getValorPatrimonio());
+            statement.setInt(1, patrimonio.getCodigoUsuario());
+            statement.setString(2, patrimonio.getNomePatrimonio());
+            statement.setFloat(3, patrimonio.getValorPatrimonio());
 
             statement.executeUpdate();
+            System.out.println("Patrimônio inserido com sucesso!");
+
+            statement.close();
         } catch (SQLException e) {
-            System.err.println("Erro ao inserir patrimonio: " + e.getMessage());
+            System.err.println("Erro ao inserir patrimonio no banco de dados." + e.getMessage());
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
             } catch (SQLException e) {
-                System.err.println("Erro ao fechar PreparedStatement: " + e.getMessage());
+                System.err.println("Erro ao fechar PreparedStatement." + e.getMessage());
             }
             ConnectionFactory.closeConnection(connection);
         }
@@ -41,15 +46,13 @@ public class PatrimonioDaoImpl implements PatrimonioDao {
 
     @Override
     public List<Patrimonio> getAll() {
-        String sql = "SELECT * FROM T_Patrimonio";
+        String sql = "SELECT * FROM T_Patrimonio ORDER BY cd_patrimonio DESC";
         List<Patrimonio> patrimonios = new ArrayList<>();
-        Connection connection = null;
-        Statement statement = null;
         ResultSet resultSet = null;
 
         try {
             connection = ConnectionFactory.getConnection();
-            statement = connection.createStatement();
+            statement = connection.prepareStatement(sql);
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
@@ -62,7 +65,7 @@ public class PatrimonioDaoImpl implements PatrimonioDao {
                 patrimonios.add(patrimonio);
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao recuperar patrimonios: " + e.getMessage());
+            System.err.println("Erro ao listar patrimônios." + e.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -72,7 +75,7 @@ public class PatrimonioDaoImpl implements PatrimonioDao {
                     statement.close();
                 }
             } catch (SQLException e) {
-                System.err.println("Erro ao fechar Statement/ResultSet: " + e.getMessage());
+                System.err.println("Erro ao fechar Statement/ResultSet." + e.getMessage());
             }
             ConnectionFactory.closeConnection(connection);
         }

@@ -10,32 +10,36 @@ import java.util.List;
 
 public class MetaDaoImpl implements MetaDao {
 
+    Connection connection = null;
+    PreparedStatement statement = null;
+
     @Override
     public void create(Meta meta) {
-        String sql = "INSERT INTO T_Meta (cd_meta, cd_usuario, nm_meta, vl_meta, vl_poupar) VALUES (?, ?, ?, ?, ?)";
-        Connection connection = null;
-        PreparedStatement statement = null;
+        String sql = "INSERT INTO T_Meta (cd_meta, cd_usuario, nm_meta, vl_meta, vl_poupar) " +
+                "VALUES (SEQ_META.NEXTVAL,, ?, ?, ?, ?)";
 
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.prepareStatement(sql);
 
-            statement.setInt(1, meta.getCodigoMeta());
-            statement.setInt(2, meta.getCodigoUsuario());
-            statement.setString(3, meta.getNomeMeta());
-            statement.setFloat(4, meta.getValorMeta());
-            statement.setFloat(5, meta.getValorPoupar());
+            statement.setInt(1, meta.getCodigoUsuario());
+            statement.setString(2, meta.getNomeMeta());
+            statement.setFloat(3, meta.getValorMeta());
+            statement.setFloat(4, meta.getValorPoupar());
 
             statement.executeUpdate();
+            System.out.println("Meta inserida com sucesso!");
+
+            statement.close();
         } catch (SQLException e) {
-            System.err.println("Erro ao inserir meta: " + e.getMessage());
+            System.err.println("Erro ao inserir meta no banco de dados." + e.getMessage());
         } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
             } catch (SQLException e) {
-                System.err.println("Erro ao fechar PreparedStatement: " + e.getMessage());
+                System.err.println("Erro ao fechar PreparedStatement." + e.getMessage());
             }
             ConnectionFactory.closeConnection(connection);
         }
@@ -43,15 +47,13 @@ public class MetaDaoImpl implements MetaDao {
 
     @Override
     public List<Meta> getAll() {
-        String sql = "SELECT * FROM T_Meta";
+        String sql = "SELECT * FROM T_Meta ORDER BY cd_meta DESC";
         List<Meta> metas = new ArrayList<>();
-        Connection connection = null;
-        Statement statement = null;
         ResultSet resultSet = null;
 
         try {
             connection = ConnectionFactory.getConnection();
-            statement = connection.createStatement();
+            statement = connection.prepareStatement(sql);
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
@@ -65,7 +67,7 @@ public class MetaDaoImpl implements MetaDao {
                 metas.add(meta);
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao recuperar metas: " + e.getMessage());
+            System.err.println("Erro ao listar as metas." + e.getMessage());
         } finally {
             try {
                 if (resultSet != null) {
@@ -75,7 +77,7 @@ public class MetaDaoImpl implements MetaDao {
                     statement.close();
                 }
             } catch (SQLException e) {
-                System.err.println("Erro ao fechar Statement/ResultSet: " + e.getMessage());
+                System.err.println("Erro ao fechar Statement/ResultSet." + e.getMessage());
             }
             ConnectionFactory.closeConnection(connection);
         }

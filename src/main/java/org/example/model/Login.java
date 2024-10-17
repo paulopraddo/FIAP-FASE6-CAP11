@@ -40,8 +40,9 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login{" +
+        return "Login {" +
                 "cd_login='" + login + '\'' +
+                ", cd_usuario=" + codigoUsuario + '\'' +
                 ", dt_login=" + dateLogin +
                 '}';
     }

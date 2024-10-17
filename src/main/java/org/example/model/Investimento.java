@@ -5,7 +5,7 @@ import java.util.Date;
 public class Investimento {
 
     private Integer codigoInvestimento;
-    private Usuario codigoUsuarioFK;
+    private Integer codigoUsuario;
     private Date dataCompra;
     private String nomeAtivo;
     private float valorPreco;
@@ -13,9 +13,9 @@ public class Investimento {
     private float valorTaxa;
     private Date dataVencimento;
 
-    public Investimento(Integer codigoInvestimento, Usuario codigoUsuario, Date dataCompra, String nomeAtivo, float valorPreco, String classe, float valorTaxa, Date dataVencimento) {
+    public Investimento(Integer codigoInvestimento, Integer codigoUsuario, Date dataCompra, String nomeAtivo, float valorPreco, String classe, float valorTaxa, Date dataVencimento) {
         this.codigoInvestimento = codigoInvestimento;
-        this.codigoUsuarioFK = codigoUsuario;
+        this.codigoUsuario = codigoUsuario;
         this.dataCompra = dataCompra;
         this.nomeAtivo = nomeAtivo;
         this.valorPreco = valorPreco;
@@ -32,12 +32,12 @@ public class Investimento {
         this.codigoInvestimento = codigoInvestimento;
     }
 
-    public Usuario getCodigoUsuarioFK() {
-        return codigoUsuarioFK;
+    public int getCodigoUsuario() {
+        return codigoUsuario;
     }
 
-    public void setCodigoUsuarioFK(Usuario codigoUsuarioFK) {
-        this.codigoUsuarioFK = codigoUsuarioFK;
+    public void setCodigoUsuario(int codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     public Date getDataCompra() {
@@ -90,7 +90,7 @@ public class Investimento {
 
     @Override
     public String toString() {
-        return "Investimento{" +
+        return "Investimento {" +
                 "cd_investimento=" + codigoInvestimento +
                 ", nm_ativo='" + nomeAtivo + '\'' +
                 ", vl_preco=" + valorPreco +

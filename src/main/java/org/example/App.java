@@ -19,34 +19,61 @@ public class App {
         Calendar calendar = Calendar.getInstance();
 
         System.out.println("Inserindo novos registros...");
+        Usuario usuario = new Usuario(null, "João Silva", "joao.silva@example.com", null, "123456789", "senhaSegura", new Date());
+        int usuarioId = usuarioDao.create(usuario);
+        // Armazenar o ID do usuário gerado
+        Investimento investimento = new Investimento(null, usuarioId, new Date(), "Ação XYZ", 100.50f, "Ação", 0.5f, new Date());
+        investimentoDao.create(investimento);
 
-        for (int i = 1; i <= 5; i++) {
-            calendar.set(2023, Calendar.JANUARY, 10 + i);
-            Date dataCompra = calendar.getTime();
-            calendar.set(2025, Calendar.JANUARY, 10 + i);
-            Date dataVencimento = calendar.getTime();
+        Login login = new Login(null, usuarioId, new Date());
+        loginDao.create(login);
 
-            Usuario usuario = new Usuario(
-                    200 + i,
-                    "Usuário " + (200 + i),
-                    "usuario" + (200 + i) + "@gmail.com",
-                    "Imagem " + (200 + i),
-                    "(11) 99999-000" + i,
-                    "senha" + (200 + i),
-                    new Date()
-            );
+        Meta meta = new Meta(null, usuarioId, "Comprar um carro", 100000.0f, 5000.0f);
+        metaDao.create(meta);
 
-            Investimento investimento = new Investimento(
-                    1000 + i,
-                    usuario,
-                    dataCompra,
-                    "Ativo " + (100 + i),
-                    1000.0f + (i * 50),
-                    "Classe " + i,
-                    0.2f + (i * 0.05f),
-                    dataVencimento
-            );
-            investimentoDao.create(investimento);
+        Patrimonio patrimonio = new Patrimonio(null, usuarioId, "Casa própria", 300000.0f);
+        patrimonioDao.create(patrimonio);
+
+        Transacao transacao = new Transacao(null, usuarioId, "Remedios", 200.0f, "Farmacia", "Despesa", new Date());
+        transacaoDao.create(transacao);
+
+
+        System.out.println("\nRecuperando os registros cadastrados...");
+        System.out.println("Lista de Usuários:");
+        usuarioDao.getAll().forEach(System.out::println);
+
+        System.out.println("Lista de Investimentos:");
+        investimentoDao.getAll().forEach(System.out::println);
+
+        System.out.println("Lista de Logins:");
+        loginDao.getAll().forEach(System.out::println);
+
+        System.out.println("\nLista de Metas:");
+        metaDao.getAll().forEach(System.out::println);
+
+        System.out.println("\nLista de Patrimônios:");
+        patrimonioDao.getAll().forEach(System.out::println);
+
+        System.out.println("\nLista de Transações:");
+        transacaoDao.getAll().forEach(System.out::println);
+
+//        for (int i = 1; i <= 5; i++) {
+//            calendar.set(2023, Calendar.JANUARY, 10 + i);
+//            Date dataCompra = calendar.getTime();
+//            calendar.set(2025, Calendar.JANUARY, 10 + i);
+//            Date dataVencimento = calendar.getTime();
+
+//            Investimento investimento = new Investimento(
+//                    1000 + i,
+//                    usuario.getCodigoUsuario(),
+//                    dataCompra,
+//                    "Ativo " + (100 + i),
+//                    1000.0f + (i * 50),
+//                    "Classe " + i,
+//                    0.2f + (i * 0.05f),
+//                    dataVencimento
+//            );
+//            investimentoDao.create(investimento);
 
 //            Login login = new Login(
 //                    "user" + (200 + i),
@@ -82,15 +109,15 @@ public class App {
 //                    new Date()
 //            );
 //            transacaoDao.insert(transacao);
-        }
+    }
 
-        System.out.println("\nRecuperando os registros cadastrados...");
-
-        System.out.println("Lista de Usuários:");
-        usuarioDao.getAll().forEach(System.out::println);
-
-        System.out.println("Lista de Investimentos:");
-        investimentoDao.getAll().forEach(System.out::println);
+//        System.out.println("\nRecuperando os registros cadastrados...");
+//
+//        System.out.println("Lista de Usuários:");
+//        usuarioDao.getAll().forEach(System.out::println);
+//
+//        System.out.println("Lista de Investimentos:");
+//        investimentoDao.getAll().forEach(System.out::println);
 
 //        System.out.println("\nLista de Logins:");
 //        loginDao.getAll().forEach(System.out::println);
@@ -103,5 +130,4 @@ public class App {
 //
 //        System.out.println("\nLista de Transações:");
 //        transacaoDao.getAll().forEach(System.out::println);
-    }
 }
