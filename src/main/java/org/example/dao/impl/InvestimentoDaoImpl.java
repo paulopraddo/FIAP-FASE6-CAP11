@@ -31,8 +31,6 @@ public class InvestimentoDaoImpl implements InvestimentoDao {
             statement.setDate(7, new Date(investimento.getDataVencimento().getTime()));
 
             statement.executeUpdate();
-            System.out.println("Investimento inserido com sucesso!");
-
             statement.close();
         } catch (SQLException e) {
             System.err.println("Erro ao inserir investimento no banco de dados." + e.getMessage());
@@ -50,7 +48,7 @@ public class InvestimentoDaoImpl implements InvestimentoDao {
 
     @Override
     public List<Investimento> getAll() {
-        String sql = "SELECT * FROM T_Investimento ORDER BY cd_investimento DESC";
+        String sql = "SELECT * FROM T_Investimento ORDER BY cd_investimento ASC";
         List<Investimento> investimentos = new ArrayList<>();
         ResultSet resultSet = null;
 

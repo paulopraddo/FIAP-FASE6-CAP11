@@ -37,7 +37,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
                 generatedId = rs.getInt(1);
             }
 
-            System.out.println("Usuário inserido com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao inserir usuário no banco de dados." + e.getMessage());
         } finally {
@@ -50,7 +49,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public List<Usuario> getAll() {
-        String sql = "SELECT * FROM T_Usuario ORDER BY cd_usuario DESC";
+        String sql = "SELECT * FROM T_Usuario ORDER BY cd_usuario ASC";
         List<Usuario> usuarios = new ArrayList<>();
         ResultSet resultSet = null;
 

@@ -26,8 +26,6 @@ public class LoginDaoImpl implements LoginDao {
             statement.setDate(2, new Date(login.getDataLogin().getTime()));
 
             statement.executeUpdate();
-            System.out.println("Dados do login inserido com sucesso!");
-
             statement.close();
         } catch (SQLException e) {
             System.err.println("Erro ao inserir login no banco de dados." + e.getMessage());
@@ -45,7 +43,7 @@ public class LoginDaoImpl implements LoginDao {
 
     @Override
     public List<Login> getAll() {
-        String sql = "SELECT * FROM T_Login ORDER BY cd_login DESC";
+        String sql = "SELECT * FROM T_Login ORDER BY cd_login ASC";
         List<Login> logins = new ArrayList<>();
         ResultSet resultSet = null;
 
