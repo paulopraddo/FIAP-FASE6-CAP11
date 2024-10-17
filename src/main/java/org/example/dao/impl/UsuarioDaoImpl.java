@@ -10,41 +10,53 @@ import java.util.List;
 
 public class UsuarioDaoImpl implements UsuarioDao {
 
-    PreparedStatement statement = null;
     Connection connection = null;
+    PreparedStatement statement = null;
 
     @Override
-    public void create(Usuario usuario) {
+    public int create(Usuario usuario) {
         String sql = "INSERT INTO T_Usuario (cd_usuario, nm_nome, ds_email, tx_imagem, nr_celular, tx_senha, dt_criacao) " +
                 "VALUES (seq_usuario.nextval, ?, ?, ?, ?, ?, ?)";
+        int generatedId = 0;
 
         try {
             connection = ConnectionFactory.getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql, new String[]{"cd_usuario"});
 
             statement.setString(1, usuario.getNome());
             statement.setString(2, usuario.getEmail());
-            statement.setString(3, usuario.getImagem());
+            statement.setString(3, usuario.getImagem() != null ? usuario.getImagem() : null);
             statement.setString(4, usuario.getCelular());
             statement.setString(5, usuario.getSenha());
             statement.setDate(6, new Date(usuario.getDataCriacao().getTime()));
 
             statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
             System.out.println("Usuário inserido com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao inserir usuário no banco de dados." + e.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection(connection);
         }
+
+        return generatedId;
+
     }
 
     @Override
     public List<Usuario> getAll() {
-        String sql = "SELECT * FROM T_Usuario ORDER BY nm_name DESC";
+        String sql = "SELECT * FROM T_Usuario ORDER BY cd_usuario DESC";
         List<Usuario> usuarios = new ArrayList<>();
-        connection = null;
         ResultSet resultSet = null;
 
         try {
             connection = ConnectionFactory.getConnection();
+            statement = connection.prepareStatement(sql);
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -52,30 +64,24 @@ public class UsuarioDaoImpl implements UsuarioDao {
                         resultSet.getInt("cd_usuario"),
                         resultSet.getString("nm_nome"),
                         resultSet.getString("ds_email"),
-                        resultSet.getString("tx_imagem"),
+                        null,
+//                        resultSet.getString("tx_imagem"),
                         resultSet.getString("nr_celular"),
                         resultSet.getString("tx_senha"),
                         resultSet.getDate("dt_criacao")
                 );
                 usuarios.add(usuario);
             }
-        } catch (SQLException e) {
-            System.err.println("Erro ao listar os investimentos: " + e.getMessage());
-        } finally {
 
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar Statement/ResultSet: " + e.getMessage());
-            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar os usuários." + e.getMessage());
+        } finally {
             ConnectionFactory.closeConnection(connection);
         }
 
         return usuarios;
     }
+
 }
