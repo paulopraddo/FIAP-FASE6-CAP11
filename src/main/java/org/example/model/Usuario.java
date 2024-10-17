@@ -78,4 +78,14 @@ public class Usuario {
         this.dataCriacao = dataCriacao;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario {" +
+                "codigoUsuario=" + codigoUsuario +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", celular='" + celular + '\'' +
+                '}';
+    }
+
 }

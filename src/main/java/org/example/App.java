@@ -28,12 +28,14 @@ public class App {
         Calendar calendar = Calendar.getInstance();
 
         System.out.println("Inserindo novos registros...");
+        Usuario usuario = new Usuario(null, "João Silva", "joao.silva@example.com", null, "123456789", "senhaSegura", new Date());
+        int usuarioId = usuarioDao.create(usuario);
+        // Armazenar o ID do usuário gerado
+        Investimento investimento = new Investimento(null, usuarioId, new Date(), "Ação XYZ", 100.50f, "Ação", 0.5f, new Date());
+        investimentoDao.create(investimento);
 
-        for (int i = 1; i <= 5; i++) {
-            calendar.set(2023, Calendar.JANUARY, 10 + i);
-            Date dataCompra = calendar.getTime();
-            calendar.set(2025, Calendar.JANUARY, 10 + i);
-            Date dataVencimento = calendar.getTime();
+        Login login = new Login(null, usuarioId, new Date());
+        loginDao.create(login);
 
             Investimento investimento = new Investimento(
                     1000 + i,

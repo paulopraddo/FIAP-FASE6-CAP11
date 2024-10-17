@@ -79,7 +79,7 @@ public class Transacao {
     }
 
     public String toString() {
-        return "Transacao{" +
+        return "Transacao {" +
                 "cd_transacao=" + codigoTransacao +
                 ", nm_transacao='" + nomeTransacao + '\'' +
                 ", vl_transacao=" + valorTransacao +

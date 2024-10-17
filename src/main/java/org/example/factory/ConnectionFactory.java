@@ -9,7 +9,7 @@ public class ConnectionFactory {
     private static ConnectionFactory connectionFactory;
     private static final String URL = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
     private static final String USER = "rm554670";
-    private static final String PASSWORD = "200287";
+    private static final String PASSWORD = "fiap24";
 
     private ConnectionFactory() {
     }

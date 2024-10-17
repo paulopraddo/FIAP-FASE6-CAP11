@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UsuarioDao {
 
-    public void create(Usuario usuario);
+    public int create(Usuario usuario);
 //    public void update(Usuario usuario);
 //    public void delete(int codigoUsuario);
 //    public Usuario getByCodigo(int codigoUsuario);

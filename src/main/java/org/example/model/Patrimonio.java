@@ -48,7 +48,7 @@ public class Patrimonio {
 
     @Override
     public String toString() {
-        return "Patrimonio{" +
+        return "Patrimonio {" +
                 "cd_patrimonio=" + codigoPatrimonio +
                 ", nm_patrimonio='" + nomePatrimonio + '\'' +
                 ", vl_patrimonio=" + valorPatrimonio +
