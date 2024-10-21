@@ -16,7 +16,7 @@ public class TransacaoDaoImpl implements TransacaoDao {
     @Override
     public void create(Transacao transacao) {
         String sql = "INSERT INTO T_Transacao (cd_transacao, cd_usuario, nm_transacao, vl_transacao, ds_categoria, ds_tipo, dt_transacao) " +
-                "VALUES (SEQ_TRANSACAO.NEXTVAL,, ?, ?, ?, ?, ?, ?)";
+                "VALUES (SEQ_TRANSACAO.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = ConnectionFactory.getConnection();
@@ -30,8 +30,6 @@ public class TransacaoDaoImpl implements TransacaoDao {
             statement.setDate(6, new java.sql.Date(transacao.getDataTransacao().getTime()));
 
             statement.executeUpdate();
-            System.out.println("Transação inserida com sucesso!");
-
             statement.close();
         } catch (SQLException e) {
             System.err.println("Erro ao inserir transação no banco de dados: " + e.getMessage());
@@ -49,7 +47,7 @@ public class TransacaoDaoImpl implements TransacaoDao {
 
     @Override
     public List<Transacao> getAll() {
-        String sql = "SELECT * FROM T_Transacao ORDER BY cd_transacao DESC";
+        String sql = "SELECT * FROM T_Transacao ORDER BY cd_transacao ASC";
         List<Transacao> transacoes = new ArrayList<>();
         ResultSet resultSet = null;
 

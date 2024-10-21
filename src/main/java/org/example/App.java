@@ -19,27 +19,37 @@ import java.util.Calendar;
 public class App {
 
     public static void main(String[] args) {
-        InvestimentoDao investimentoDao = new InvestimentoDaoImpl();
-        LoginDao loginDao = new LoginDaoImpl();
-        MetaDao metaDao = new MetaDaoImpl();
-        PatrimonioDao patrimonioDao = new PatrimonioDaoImpl();
-        TransacaoDao transacaoDao = new TransacaoDaoImpl();
+        UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl();
+        InvestimentoDaoImpl investimentoDao = new InvestimentoDaoImpl();
+        LoginDaoImpl loginDao = new LoginDaoImpl();
+        MetaDaoImpl metaDao = new MetaDaoImpl();
+        PatrimonioDaoImpl patrimonioDao = new PatrimonioDaoImpl();
+        TransacaoDaoImpl transacaoDao = new TransacaoDaoImpl();
 
         Calendar calendar = Calendar.getInstance();
 
-        System.out.println("Inserindo novos registros...");
-        Usuario usuario = new Usuario(null, "João Silva", "joao.silva@example.com", null, "123456789", "senhaSegura", new Date());
-        int usuarioId = usuarioDao.create(usuario);
-        // Armazenar o ID do usuário gerado
-        Investimento investimento = new Investimento(null, usuarioId, new Date(), "Ação XYZ", 100.50f, "Ação", 0.5f, new Date());
-        investimentoDao.create(investimento);
+        System.out.println("CRIANDO NOVOS REGISTROS...");
 
-        Login login = new Login(null, usuarioId, new Date());
-        loginDao.create(login);
+        for (int i = 1; i <= 5; i++) {
+            calendar.set(2023, Calendar.JANUARY, 10 + i);
+            Date dataCompra = calendar.getTime();
+            calendar.set(2025, Calendar.JANUARY, 10 + i);
+            Date dataVencimento = calendar.getTime();
+
+            Usuario usuario = new Usuario(
+                    0 + i,
+                    "NomeUsario" + i,
+                    "EmailUsuario" + i,
+                    null,
+                    "99876578" + i,
+                    "SenhaUsuario" + i,
+                    new Date()
+            );
+            int usuarioId = usuarioDao.create(usuario); // Armazenar o ID do usuário gerado
 
             Investimento investimento = new Investimento(
                     1000 + i,
-                    200 + i,
+                    usuarioId,
                     dataCompra,
                     "Ativo " + (100 + i),
                     1000.0f + (i * 50),
@@ -51,14 +61,14 @@ public class App {
 
             Login login = new Login(
                     "user" + (200 + i),
-                    300 + i,
+                    usuarioId,
                     new Date()
             );
             loginDao.create(login);
 
             Meta meta = new Meta(
                     400 + i,
-                    500 + i,
+                    usuarioId,
                     "Meta " + (i * 10),
                     10000.0f + (i * 1000),
                     5000.0f + (i * 500)
@@ -67,7 +77,7 @@ public class App {
 
             Patrimonio patrimonio = new Patrimonio(
                     600 + i,
-                    700 + i,
+                    usuarioId,
                     "Patrimônio " + (i + 5),
                     30000.0f + (i * 3000)
             );
@@ -75,7 +85,7 @@ public class App {
 
             Transacao transacao = new Transacao(
                     800 + i,
-                    900 + i,
+                    usuarioId,
                     "Transação " + (i * 20),
                     200.0f + (i * 25),
                     "Categoria " + i,
@@ -85,7 +95,10 @@ public class App {
             transacaoDao.create(transacao);
         }
 
-        System.out.println("\nRecuperando os registros cadastrados...");
+        System.out.println("\nLISTAGEM DOS REGISTROS CADASTRADOS:");
+
+        System.out.println("Lista de Usuários:");
+        usuarioDao.getAll().forEach(System.out::println);
 
         System.out.println("Lista de Investimentos:");
         investimentoDao.getAll().forEach(System.out::println);

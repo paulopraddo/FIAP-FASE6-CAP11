@@ -27,8 +27,6 @@ public class PatrimonioDaoImpl implements PatrimonioDao {
             statement.setFloat(3, patrimonio.getValorPatrimonio());
 
             statement.executeUpdate();
-            System.out.println("Patrimônio inserido com sucesso!");
-
             statement.close();
         } catch (SQLException e) {
             System.err.println("Erro ao inserir patrimonio no banco de dados." + e.getMessage());
@@ -46,7 +44,7 @@ public class PatrimonioDaoImpl implements PatrimonioDao {
 
     @Override
     public List<Patrimonio> getAll() {
-        String sql = "SELECT * FROM T_Patrimonio ORDER BY cd_patrimonio DESC";
+        String sql = "SELECT * FROM T_Patrimonio ORDER BY cd_patrimonio ASC";
         List<Patrimonio> patrimonios = new ArrayList<>();
         ResultSet resultSet = null;
 

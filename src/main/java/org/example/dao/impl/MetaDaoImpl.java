@@ -16,7 +16,7 @@ public class MetaDaoImpl implements MetaDao {
     @Override
     public void create(Meta meta) {
         String sql = "INSERT INTO T_Meta (cd_meta, cd_usuario, nm_meta, vl_meta, vl_poupar) " +
-                "VALUES (SEQ_META.NEXTVAL,, ?, ?, ?, ?)";
+                "VALUES (SEQ_META.NEXTVAL, ?, ?, ?, ?)";
 
         try {
             connection = ConnectionFactory.getConnection();
@@ -28,8 +28,6 @@ public class MetaDaoImpl implements MetaDao {
             statement.setFloat(4, meta.getValorPoupar());
 
             statement.executeUpdate();
-            System.out.println("Meta inserida com sucesso!");
-
             statement.close();
         } catch (SQLException e) {
             System.err.println("Erro ao inserir meta no banco de dados." + e.getMessage());
@@ -47,7 +45,7 @@ public class MetaDaoImpl implements MetaDao {
 
     @Override
     public List<Meta> getAll() {
-        String sql = "SELECT * FROM T_Meta ORDER BY cd_meta DESC";
+        String sql = "SELECT * FROM T_Meta ORDER BY cd_meta ASC";
         List<Meta> metas = new ArrayList<>();
         ResultSet resultSet = null;
 

@@ -29,7 +29,7 @@ CREATE TABLE t_login (
 ALTER TABLE t_login ADD CONSTRAINT t_login_pk PRIMARY KEY (cd_login);
 
 CREATE TABLE t_meta (
-    cd_metas   INTEGER NOT NULL,
+    cd_meta   INTEGER NOT NULL,
     cd_usuario INTEGER NOT NULL,
     nm_meta    VARCHAR2(100) NOT NULL,
     vl_meta    FLOAT NOT NULL,
