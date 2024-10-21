@@ -1,7 +1,17 @@
 package org.example;
 
+
+import org.example.dao.InvestimentoDao;
+import org.example.dao.LoginDao;
+import org.example.dao.MetaDao;
+import org.example.dao.PatrimonioDao;
+import org.example.dao.TransacaoDao;
 import org.example.dao.impl.*;
-import org.example.model.*;
+import org.example.model.Investimento;
+import org.example.model.Login;
+import org.example.model.Meta;
+import org.example.model.Patrimonio;
+import org.example.model.Transacao;
 
 import java.util.Date;
 import java.util.Calendar;
